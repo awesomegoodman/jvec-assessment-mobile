@@ -41,14 +41,18 @@ const LoginForm = () => {
 
         // Extract the token from the response data
         const token = data.token;
+        const user_id = data.user_id;
 
         // Store the token in AsyncStorage
         await AsyncStorage.setItem('authToken', token);
+        await AsyncStorage.setItem('userId', String(user_id));
 
         setSuccess('Login successful');
         setUsername('');
         setPassword('');
-        navigation.navigate('ContactsList' as never);
+        navigation.navigate('Contacts' as never);
+        setSuccess('');
+        setError('');
       } else {
         // Handle login failure, e.g., incorrect username or password
         setError('Login failed. Please check your information.');

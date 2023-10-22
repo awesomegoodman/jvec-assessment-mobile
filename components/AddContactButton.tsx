@@ -15,7 +15,7 @@ const AddButton = () => {
   const navigation = useNavigation();
 
   return (
-    <AddButtonContainer onPress={() => navigation.navigate('CreateContact' as never)}>
+    <AddButtonContainer onPress={() => navigation.navigate('Add contact' as never)}>
       <AddButtonText>Add</AddButtonText>
     </AddButtonContainer>
   );

@@ -33,6 +33,7 @@ const AppNavigator = () => {
     };
     checkLoginStatus();
   }, []);
+  console.log(loggedIn);
 
   return (
     <NavigationContainer>

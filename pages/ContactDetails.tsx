@@ -2,10 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { Contact, RootStackParamList } from '../constants/types';
 import {
   ComponentContainer,
+  ContactNameText,
   CtaButtonText,
   DeleteButton,
   ModalContainer,
   ModalText,
+  PhoneNumberText,
   TouchableCta,
 } from '../styles/styles';
 import styled from 'styled-components/native';
@@ -22,13 +24,13 @@ const ContactInfo = styled.View`
 const EditButton = styled.Text`
   color: blue;
   text-decoration: underline;
-  cursor: pointer;
 `;
 
 const ContactDetails = () => {
   const [contact, setContact] = useState<Contact | null>(null);
   const route = useRoute<RouteProp<RootStackParamList, 'ContactDetails'>>();
-  const { contactId } = route.params;
+  const { contact: contactObj } = route.params;
+  const contactId = contactObj?.id;
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
   const [deleteModalVisible, setDeleteModalVisible] = useState(false);
 
@@ -42,7 +44,7 @@ const ContactDetails = () => {
 
   const handleEditContact = () => {
     // Navigate to the EditContact page with the contactId as a parameter
-    navigation.navigate('EditContact', { contactId: contactId });
+    navigation.navigate('Edit contact', { contact: contact });
   };
 
   const handleDeleteContact = () => {
@@ -54,9 +56,10 @@ const ContactDetails = () => {
       const response = await fetch(`${BACKEND_ROOT_DOMAIN}/contacts/delete/${contactId}/`, {
         method: 'DELETE',
       });
-      if (response.status === 204) {
+      console.log(response);
+      if (response.status === 204 || response.status === 200 || response.ok) {
         // Contact deleted successfully
-        navigation.navigate('ContactsList' as never); // Navigate back to the ContactsList page
+        navigation.navigate('Contacts' as never);
       } else {
         console.error('Failed to delete contact');
       }
@@ -71,8 +74,8 @@ const ContactDetails = () => {
     <ComponentContainer>
       {contact ? (
         <ContactInfo>
-          <Text>Contact Name: {contact.first_name} {contact.last_name}</Text>
-          <Text>Phone Number: {contact.phone_number}</Text>
+          <ContactNameText>Contact Name: {contact.first_name} {contact.last_name}</ContactNameText>
+          <PhoneNumberText>Phone Number: {contact.phone_number}</PhoneNumberText>
           <TouchableOpacity onPress={handleEditContact}>
             <EditButton>Edit</EditButton>
           </TouchableOpacity>

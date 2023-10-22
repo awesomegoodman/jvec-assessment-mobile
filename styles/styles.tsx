@@ -45,7 +45,7 @@ export const SuccessText = styled.Text`
   font-size: 16px;
 `;
 
-export const CtaButton = styled.TouchableOpacity`
+export const CtaButton = styled.Button`
   width: 80%;
   background-color: #007BFF;
   align-items: center;
@@ -86,4 +86,14 @@ export const ModalText = styled.Text`
   padding: 20px;
   border-radius: 10px;
   text-align: center;
+`;
+
+export const ContactNameText = styled.Text`
+  font-size: 18px;
+  color: #333;
+`;
+
+export const PhoneNumberText = styled.Text`
+  font-size: 18px;
+  color: #333;
 `;

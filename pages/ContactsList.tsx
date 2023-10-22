@@ -11,18 +11,27 @@ import {
 import { useNavigation } from '@react-navigation/native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { StackNavigationProp } from '@react-navigation/stack';
-import { Text, Modal } from 'react-native';
+import { Modal } from 'react-native';
 import { BACKEND_ROOT_DOMAIN } from '../constants/constants';
 
 const ContactItem = styled.View`
   padding: 20px;
   border-bottom-width: 1px;
   border-bottom-color: #ddd;
+  flex: 1;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 `;
 
 const ContactName = styled.Text`
   font-size: 18px;
   color: #333;
+`;
+
+const DeleteText = styled.Text`
+  font-size: 18px;
+  color: #FF0000;
 `;
 
 const ContactsList = () => {
@@ -44,8 +53,8 @@ const ContactsList = () => {
     fetchContacts();
   }, []);
 
-  const handleContactPress = (contactId: number) => {
-    navigation.navigate('ContactDetails', { contactId: contactId });
+  const handleContactPress = (contact: Contact) => {
+    navigation.navigate('Contact details', { contact: contact });
   };
 
   const handleDeleteContact = (contactId: number) => {
@@ -81,14 +90,14 @@ const ContactsList = () => {
       {contacts.map((contact) => (
         <TouchableOpacity
           key={contact.id}
-          onPress={() => handleContactPress(contact.id)}
+          onPress={() => handleContactPress(contact)}
         >
           <ContactItem key={contact.id}>
             <ContactName>
               {contact.first_name} {contact.last_name}
             </ContactName>
             <TouchableOpacity onPress={() => handleDeleteContact(contact.id)}>
-              <Text>Delete</Text>
+              <DeleteText>Delete</DeleteText>
             </TouchableOpacity>
           </ContactItem>
         </TouchableOpacity>

@@ -1,16 +1,19 @@
 import React, { useState } from 'react';
-import { CtaButton, CtaText, ErrorText, FormContainer, InputField } from '../styles/styles';
-import { RouteProp, useRoute } from '@react-navigation/native';
+import { CtaButton, CtaText, ErrorText, FormContainer, InputField, SuccessText } from '../styles/styles';
+import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import { RootStackParamList } from '../constants/types';
-import { BACKEND_ROOT_DOMAIN } from '../constants/constants';
+import { BACKEND_ROOT_DOMAIN, getHeaders } from '../constants/constants';
 
 const EditContact = () => {
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
-  const [error, setError] = useState('');
   const route = useRoute<RouteProp<RootStackParamList, 'EditContact'>>();
-  const { contactId } = route.params;
+  const { contact: contactObj } = route.params;
+  const contactId = contactObj.id;
+  const navigation = useNavigation();
+  const [firstName, setFirstName] = useState(contactObj.first_name);
+  const [lastName, setLastName] = useState(contactObj.last_name);
+  const [phoneNumber, setPhoneNumber] = useState(contactObj.phone_number);
+  const [success, setSuccess] = useState('');
+  const [error, setError] = useState('');
 
   const handleUpdateContact = async () => {
     // Basic input validation
@@ -24,24 +27,29 @@ const EditContact = () => {
       first_name: firstName,
       last_name: lastName,
       phone_number: phoneNumber,
+      user: contactId,
     };
+
+    const headers = await getHeaders();
 
     // Make a PUT request to update the contact on Django backend
     try {
       const response = await fetch(`${BACKEND_ROOT_DOMAIN}/contacts/update/${contactId}/`, {
         method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: headers,
         body: JSON.stringify(contactData),
       });
 
+      const data = await response.json();
+      console.log(data);
+
       if (response.status === 200) {
         // Contact update successful, handle the response as needed
-        setError('Contact updated successfully');
+        setSuccess('Contact updated successfully');
         setFirstName('');
         setLastName('');
         setPhoneNumber('');
+        navigation.navigate('Contacts' as never);
       } else {
         // Handle contact update failure
         setError('Contact update failed. Please check your information.');
@@ -55,7 +63,6 @@ const EditContact = () => {
   return (
     <FormContainer>
       <CtaText>Edit Contact</CtaText>
-      {error && <ErrorText>{error}</ErrorText>}
       <InputField
         placeholder="First Name"
         value={firstName}
@@ -71,6 +78,10 @@ const EditContact = () => {
         value={phoneNumber}
         onChangeText={setPhoneNumber}
       />
+
+      {error && <ErrorText>{error}</ErrorText>}
+      {success && <SuccessText>{success}</SuccessText>}
+
       <CtaButton title="Update Contact" onPress={handleUpdateContact} />
     </FormContainer>
   );

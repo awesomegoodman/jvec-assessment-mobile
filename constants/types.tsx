@@ -4,9 +4,9 @@ import { ParamListBase } from '@react-navigation/native';
 export type RootStackParamList = {
     Homepage: undefined;
     Signup: undefined;
-    ContactDetails: { contactId: number };
+    ContactDetails: { contact: Contact };
     DeleteContact: { contactId: number };
-    EditContact: { contactId: number };
+    EditContact: { contact: Contact };
 } & ParamListBase;
 
 export type Contact = {

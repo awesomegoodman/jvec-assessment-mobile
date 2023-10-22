@@ -55,6 +55,8 @@ const SignupForm = () => {
         setEmail('');
         setPassword('');
         navigation.navigate('Login' as never);
+        setSuccess('');
+        setError('');
       } else {
         setError('Registration failed. Please check your information.');
       }
