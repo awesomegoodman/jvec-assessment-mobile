@@ -58,7 +58,7 @@ const SignupForm = () => {
         setSuccess('');
         setError('');
       } else {
-        setError('Registration failed. Please check your information.');
+        setError('Registration failed. Please adjust your information.');
       }
     } catch (err) {
       console.error('Error:', err);

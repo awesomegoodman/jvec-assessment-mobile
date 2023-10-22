@@ -33,14 +33,33 @@ const AppNavigator = () => {
     };
     checkLoginStatus();
   }, []);
-  console.log(loggedIn);
 
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName={loggedIn ? 'Contacts' : 'Home'}>
-        <Stack.Screen name="Home" component={Homepage} />
-        <Stack.Screen name="Register" component={Signup} />
-        <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen 
+          name="Contact Manager"
+          options={{
+            headerTitleAlign: 'center',
+          }}
+          component={Homepage}
+        />
+        <Stack.Screen
+          name="Register"
+          component={Signup}
+          options={{
+            // headerShown: false,
+            headerTitle: '',
+          }}
+        />
+        <Stack.Screen
+          name="Login"
+          component={Login}
+          options={{
+            // headerShown: false,
+            headerTitle: '',
+          }}
+        />
         <Stack.Screen name="Add contact" component={CreateContact} />
         <Stack.Screen name="Edit contact" component={EditContact} />
         <Stack.Screen
