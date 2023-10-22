@@ -15,7 +15,7 @@ This project is a Contact Manager Mobile App built with React Native, designed t
 
 **Installation**
 
-Before running the mobile app, make sure you have Node.js and npm installed on your system. Also, ensure you have cloned the 'jvec-assessment-mobile' repository. Navigate to the project folder and follow these steps:
+Before running the mobile app, make sure you have Node.js and npm installed on your system. Also, ensure you have cloned the ['jvec-assessment-mobile' repository](https://github.com/awesomegoodman/jvec-assessment-mobile). Navigate to the project folder and follow these steps:
 
 1. Install project dependencies by running the following command in the project root:
 
