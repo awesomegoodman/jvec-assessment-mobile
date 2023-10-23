@@ -34,6 +34,7 @@ const ContactsList = () => {
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
   const [deleteModalVisible, setDeleteModalVisible] = useState(false);
   const [contactToDelete, setContactToDelete] = useState<number | null>(null);
+  const [isLoading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchContacts = async () => {
@@ -41,6 +42,7 @@ const ContactsList = () => {
         const response = await fetch(`${BACKEND_ROOT_DOMAIN}/contacts/list/`);
         const data = await response.json();
         setContacts(data);
+        setLoading(false);
       } catch (error) {
         console.error('Error:', error);
       }
@@ -103,7 +105,7 @@ const ContactsList = () => {
           </ContactItem>
         ))}
 
-        {contacts.length === 0 && (
+        {!isLoading && contacts.length === 0 && (
           <TouchableOpacity
             onPress={() => navigation.navigate(screenNames.AddContact)}
           >

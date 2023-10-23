@@ -3,7 +3,6 @@ import { Modal } from 'react-native';
 import {
   ModalContainer,
   ModalText,
-  ButtonContainer as ModalButtonContainer,
   TouchableCta,
   CtaButtonText,
 } from '../styles/styles';
@@ -19,14 +18,12 @@ const CustomModal = ({ visible, text, onDelete, onCancel }: CustomModalProps) =>
     >
       <ModalContainer>
         <ModalText>{text}</ModalText>
-        <ModalButtonContainer>
           <TouchableCta onPress={onDelete}>
             <CtaButtonText>Delete</CtaButtonText>
           </TouchableCta>
           <TouchableCta onPress={onCancel}>
             <CtaButtonText>Cancel</CtaButtonText>
           </TouchableCta>
-        </ModalButtonContainer>
       </ModalContainer>
     </Modal>
   );

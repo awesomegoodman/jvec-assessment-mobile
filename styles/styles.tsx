@@ -12,7 +12,6 @@ export const ComponentContainer = styled.View`
   align-items: center;
   padding-top: 20px;
   padding-bottom: 20px;
-  border: red;
   height: 200%;
 `;
 
@@ -23,7 +22,6 @@ export const ButtonContainer = styled.View`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  border: red;
 `;
 
 export const FormContainer = styled.View`
