@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { CtaButton, CtaText, ErrorText, FormContainer, InputField, SuccessText, placeholderTextColor } from '../styles/styles';
+import { CtaButtonText, CtaText, ErrorText, FormContainer, InputField, SuccessText, TouchableCta, placeholderTextColor } from '../styles/styles';
 import { BACKEND_ROOT_DOMAIN } from '../constants/constants';
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { screenNames } from '../constants/screenNames';
 
 const LoginForm = () => {
   const [username, setUsername] = useState('');
@@ -51,7 +52,7 @@ const LoginForm = () => {
         setSuccess('Login successful');
         setUsername('');
         setPassword('');
-        navigation.navigate('Contacts' as never);
+        navigation.navigate(screenNames.Contacts as never);
       } else {
         // Handle login failure, e.g., incorrect username or password
         setError('Login failed. Please check your information.');
@@ -81,7 +82,9 @@ const LoginForm = () => {
       />
       {error && <ErrorText>{error}</ErrorText>}
       {success && <SuccessText>{success}</SuccessText>}
-      <CtaButton title="Login" onPress={handleLogin} testID="login-button" />
+      <TouchableCta onPress={handleLogin} testID="login-button">
+        <CtaButtonText>Login</CtaButtonText>
+      </TouchableCta>
     </FormContainer>
   );
 };

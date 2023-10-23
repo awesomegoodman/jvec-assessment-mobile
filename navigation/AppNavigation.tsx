@@ -15,6 +15,7 @@ import ContactDetails from '../pages/ContactDetails';
 import { enableScreens } from 'react-native-screens';
 import { RootStackParamList } from '../constants/types';
 import AddButton from '../components/AddContactButton';
+import { screenNames } from '../constants/screenNames';
 enableScreens();
 
 const Stack = createStackNavigator<RootStackParamList>();
@@ -36,39 +37,39 @@ const AppNavigator = () => {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName={loggedIn ? 'Contacts' : 'Home'}>
+      <Stack.Navigator initialRouteName={loggedIn ? screenNames.Contacts : screenNames.Home}>
         <Stack.Screen
-          name="Contact Manager"
+          name={screenNames.Home}
           options={{
             headerTitleAlign: 'center',
           }}
           component={Homepage}
         />
         <Stack.Screen
-          name="Register"
+          name={screenNames.Register}
           component={Signup}
           options={{
             headerTitle: '',
           }}
         />
         <Stack.Screen
-          name="Login"
+          name={screenNames.Login}
           component={Login}
           options={{
             headerTitle: '',
           }}
         />
-        <Stack.Screen name="Add contact" component={CreateContact} />
-        <Stack.Screen name="Edit contact" component={EditContact} />
+        <Stack.Screen name={screenNames.AddContact} component={CreateContact} />
+        <Stack.Screen name={screenNames.EditContact} component={EditContact} />
         <Stack.Screen
-          name="Contacts"
+          name={screenNames.Contacts}
           component={ContactsList}
           options={{
             headerRight: AddButton,
             headerLeft: () => loggedIn ? null : undefined,
           }}
         />
-        <Stack.Screen name="Contact details" component={ContactDetails} />
+        <Stack.Screen name={screenNames.ContactDetails} component={ContactDetails} />
       </Stack.Navigator>
     </NavigationContainer>
   );

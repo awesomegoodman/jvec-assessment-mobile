@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { CtaButton, CtaText, ErrorText, FormContainer, InputField, SuccessText, placeholderTextColor } from '../styles/styles';
+import { CtaButtonText, CtaText, ErrorText, FormContainer, InputField, SuccessText, TouchableCta, placeholderTextColor } from '../styles/styles';
 import { BACKEND_ROOT_DOMAIN, getHeaders } from '../constants/constants';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
+import { screenNames } from '../constants/screenNames';
 
 const CreateContact = () => {
   const [firstName, setFirstName] = useState('');
@@ -50,7 +51,7 @@ const CreateContact = () => {
         setFirstName('');
         setLastName('');
         setPhoneNumber('');
-        navigation.navigate('Contacts' as never);
+        navigation.navigate(screenNames.Contacts as never);
       } else {
         // Handle contact creation failure
         setError('Contact creation failed. Please check your information.');
@@ -87,7 +88,9 @@ const CreateContact = () => {
       {error && <ErrorText>{error}</ErrorText>}
       {success && <SuccessText>{success}</SuccessText>}
 
-      <CtaButton title="Create Contact" onPress={handleCreateContact} testID="create-contact"/>
+      <TouchableCta onPress={handleCreateContact} testID="create-contact">
+        <CtaButtonText>Save</CtaButtonText>
+      </TouchableCta>
     </FormContainer>
   );
 };

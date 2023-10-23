@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { CtaButton, CtaText, ErrorText, FormContainer, InputField, SuccessText, placeholderTextColor } from '../styles/styles';
+import { CtaButtonText, CtaText, ErrorText, FormContainer, InputField, SuccessText, TouchableCta, placeholderTextColor } from '../styles/styles';
 import { BACKEND_ROOT_DOMAIN } from '../constants/constants';
 import { useNavigation } from '@react-navigation/native';
+import { screenNames } from '../constants/screenNames';
 
 const SignupForm = () => {
   const [username, setUsername] = useState('');
@@ -55,7 +56,7 @@ const SignupForm = () => {
         setUsername('');
         setEmail('');
         setPassword('');
-        navigation.navigate('Login' as never);
+        navigation.navigate(screenNames.Login as never);
       } else {
         setSuccess('');
         setError('Registration failed. Please adjust your information.');
@@ -90,7 +91,10 @@ const SignupForm = () => {
       />
       {error && <ErrorText>{error}</ErrorText>}
       {success && <SuccessText>{success}</SuccessText>}
-      <CtaButton title="Register" onPress={handleSignup} testID="register-button" />
+
+      <TouchableCta onPress={handleSignup} testID="register-button">
+        <CtaButtonText>Register</CtaButtonText>
+      </TouchableCta>
     </FormContainer>
   );
 };

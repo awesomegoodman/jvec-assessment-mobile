@@ -15,3 +15,10 @@ export type Contact = {
     last_name: string;
     phone_number?: string;
 };
+
+export type CustomModalProps = {
+    visible: boolean;
+    text: string;
+    onDelete: () => void;
+    onCancel: () => void;
+};

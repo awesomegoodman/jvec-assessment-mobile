@@ -3,31 +3,29 @@ import styled from 'styled-components/native';
 import { Contact, RootStackParamList } from '../constants/types';
 import {
   ComponentContainer,
-  CtaButtonText,
-  ModalContainer,
-  ModalText,
-  TouchableCta,
+  ContactItem,
+  ContactName,
+  ScrollableContainer,
 } from '../styles/styles';
 import { useNavigation } from '@react-navigation/native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { StackNavigationProp } from '@react-navigation/stack';
-import { Modal } from 'react-native';
 import { BACKEND_ROOT_DOMAIN } from '../constants/constants';
 import Icon from 'react-native-vector-icons/EvilIcons';
+import Icon2 from 'react-native-vector-icons/AntDesign';
+import CustomModal from '../components/Modal';
+import { screenNames } from '../constants/screenNames';
 
-const ContactItem = styled.View`
-  padding: 20px;
-  border-bottom-width: 1px;
-  border-bottom-color: #ddd;
-  flex: 1;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
+const TextContainer = styled.TouchableOpacity`
+  padding: 10px;
+  border-radius: 10px;
+  width: 80%;
 `;
 
-const ContactName = styled.Text`
-  font-size: 18px;
-  color: #333;
+const ButtonContainer = styled.TouchableOpacity`
+  padding: 10px;
+  border: gray;
+  border-radius: 10px;
 `;
 
 
@@ -51,7 +49,7 @@ const ContactsList = () => {
   }, []);
 
   const handleContactPress = (contact: Contact) => {
-    navigation.navigate('Contact details', { contact: contact });
+    navigation.navigate(screenNames.ContactDetails, { contact: contact });
   };
 
   const handleDeleteContact = (contactId: number) => {
@@ -68,6 +66,8 @@ const ContactsList = () => {
             method: 'DELETE',
           }
         );
+        const data = response.json();
+        console.log(data);
         if (response.status === 204) {
           // Contact deleted successfully
           setContacts(contacts.filter((contact) => contact.id !== contactToDelete));
@@ -83,49 +83,45 @@ const ContactsList = () => {
   };
 
   return (
-    <ComponentContainer>
-      {contacts.map((contact) => (
-        <TouchableOpacity
-          key={contact.id}
-          onPress={() => handleContactPress(contact)}
-        >
-          <ContactItem key={contact.id}>
-            <ContactName>
-              {contact.first_name} {contact.last_name}
-            </ContactName>
-            <TouchableOpacity onPress={() => handleDeleteContact(contact.id)}>
+    <ScrollableContainer>
+      <ComponentContainer>
+        {contacts.map((contact) => (
+          <ContactItem
+            key={contact.id}
+          >
+            <TextContainer
+              key={contact.id}
+              onPress={() => handleContactPress(contact)}
+            >
+              <ContactName>
+                {contact.first_name} {contact.last_name}
+              </ContactName>
+            </TextContainer>
+            <ButtonContainer onPress={() => handleDeleteContact(contact.id)}>
               <Icon name="trash" size={30} color="gray" />
-            </TouchableOpacity>
+            </ButtonContainer>
           </ContactItem>
-        </TouchableOpacity>
-      ))}
+        ))}
 
-      {contacts.length === 0 && (
-        <TouchableOpacity
-          onPress={() => navigation.navigate('CreateContact')}
-        >
-          <ContactItem>
-            <ContactName>Add Contact</ContactName>
-          </ContactItem>
-        </TouchableOpacity>
-      )}
+        {contacts.length === 0 && (
+          <TouchableOpacity
+            onPress={() => navigation.navigate(screenNames.AddContact)}
+          >
+            <ButtonContainer>
+              <Icon2 name="adduser" size={30} color="gray" />
+            </ButtonContainer>
+          </TouchableOpacity>
+        )}
 
-      <Modal
-        animationType="slide"
-        transparent={true}
-        visible={deleteModalVisible}
-      >
-        <ModalContainer>
-          <ModalText>Are you sure you want to delete this contact?</ModalText>
-          <TouchableCta onPress={handleDelete}>
-            <CtaButtonText>Delete</CtaButtonText>
-          </TouchableCta>
-          <TouchableCta onPress={() => setDeleteModalVisible(false)}>
-            <CtaButtonText>Cancel</CtaButtonText>
-          </TouchableCta>
-        </ModalContainer>
-      </Modal>
-    </ComponentContainer>
+        <CustomModal
+          visible={deleteModalVisible}
+          text="Are you sure you want to delete this contact?"
+          onDelete={handleDelete}
+          onCancel={() => setDeleteModalVisible(false)}
+        />
+
+      </ComponentContainer>
+    </ScrollableContainer>
   );
 };
 

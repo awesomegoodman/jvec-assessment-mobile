@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { CtaButton, CtaText, ErrorText, FormContainer, InputField, SuccessText } from '../styles/styles';
+import { CtaButtonText, CtaText, ErrorText, FormContainer, InputField, SuccessText, TouchableCta } from '../styles/styles';
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import { RootStackParamList } from '../constants/types';
 import { BACKEND_ROOT_DOMAIN, getHeaders } from '../constants/constants';
+import { screenNames } from '../constants/screenNames';
 
 const EditContact = () => {
   const route = useRoute<RouteProp<RootStackParamList, 'EditContact'>>();
@@ -49,7 +50,7 @@ const EditContact = () => {
         setFirstName('');
         setLastName('');
         setPhoneNumber('');
-        navigation.navigate('Contacts' as never);
+        navigation.navigate(screenNames.Contacts as never);
       } else {
         // Handle contact update failure
         setError('Contact update failed. Please check your information.');
@@ -82,7 +83,9 @@ const EditContact = () => {
       {error && <ErrorText>{error}</ErrorText>}
       {success && <SuccessText>{success}</SuccessText>}
 
-      <CtaButton title="Update Contact" onPress={handleUpdateContact} />
+      <TouchableCta onPress={handleUpdateContact}>
+        <CtaButtonText>Update</CtaButtonText>
+      </TouchableCta>
     </FormContainer>
   );
 };
