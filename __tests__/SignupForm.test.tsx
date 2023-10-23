@@ -3,12 +3,22 @@ import SignupForm from '../components/SignupForm';
 import { fireEvent, render } from '@testing-library/react-native';
 
 import { useNavigation } from '@react-navigation/native';
+import fetchMock from 'jest-fetch-mock';
+
 
 jest.mock('@react-navigation/native', () => ({
   useNavigation: () => ({
     navigate: jest.fn(),
   }),
 }));
+
+beforeEach(() => {
+  fetchMock.enableMocks();
+});
+
+afterEach(() => {
+  fetchMock.resetMocks();
+});
 
 describe('SignupForm Component', () => {
   it('renders the form elements', () => {
@@ -35,6 +45,14 @@ describe('SignupForm Component', () => {
     fireEvent.press(registerButton);
     expect(queryByText('Please fill in all fields.')).toBeTruthy();
 
+    // Mock an unsuccessful registration response
+    fetchMock.mockResponseOnce(JSON.stringify({
+      detail: 'Registration failed. Please adjust your information.',
+    }), {
+      status: 400, // Simulating a bad request status
+      headers: { 'Content-Type': 'application/json' },
+    });
+
     // Fill in the fields with invalid data and submit
     fireEvent.changeText(usernameInput, 'user123');
     fireEvent.changeText(emailInput, 'invalidemail');
@@ -53,6 +71,14 @@ describe('SignupForm Component', () => {
     const emailInput = getByPlaceholderText('Email');
     const passwordInput = getByPlaceholderText('Password');
     const registerButton = getByTestId('register-button');
+
+    // Mock a successful registration response
+    fetchMock.mockResponseOnce(JSON.stringify({
+      message: 'User registered successfully',
+    }), {
+      status: 201, // Simulating a successful registration status
+      headers: { 'Content-Type': 'application/json' },
+    });
 
     // Fill in the fields with valid data and submit
     fireEvent.changeText(usernameInput, 'validuser3');

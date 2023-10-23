@@ -40,12 +40,13 @@ const CreateContact = () => {
         body: JSON.stringify(contactData),
       });
 
-      const data = await response.json();
-      console.log(data);
+      // const data = await response.json();
+      // console.log(data);
 
       if (response.status === 201) {
         // Contact creation successful, handle the response as needed
         setSuccess('Contact created successfully');
+        setError('');
         setFirstName('');
         setLastName('');
         setPhoneNumber('');
@@ -62,7 +63,7 @@ const CreateContact = () => {
 
   return (
     <FormContainer>
-      <CtaText>Create Contact</CtaText>
+      <CtaText testID="create-contact-text">Create Contact</CtaText>
 
       <InputField
         placeholder="First name"
@@ -86,7 +87,7 @@ const CreateContact = () => {
       {error && <ErrorText>{error}</ErrorText>}
       {success && <SuccessText>{success}</SuccessText>}
 
-      <CtaButton title="Create Contact" onPress={handleCreateContact} />
+      <CtaButton title="Create Contact" onPress={handleCreateContact} testID="create-contact"/>
     </FormContainer>
   );
 };

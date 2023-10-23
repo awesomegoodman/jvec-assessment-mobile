@@ -3,12 +3,21 @@ import LoginForm from '../components/LoginForm';
 import { fireEvent, render } from '@testing-library/react-native';
 
 import { useNavigation } from '@react-navigation/native';
+import fetchMock from 'jest-fetch-mock';
 
 jest.mock('@react-navigation/native', () => ({
   useNavigation: () => ({
     navigate: jest.fn(),
   }),
 }));
+
+beforeEach(() => {
+  fetchMock.enableMocks();
+});
+
+afterEach(() => {
+  fetchMock.resetMocks();
+});
 
 describe('LoginForm Component', () => {
   it('renders the form elements', () => {
@@ -33,6 +42,16 @@ describe('LoginForm Component', () => {
     fireEvent.press(loginButton);
     expect(queryByText('Please fill in all fields.')).toBeTruthy();
 
+    // Mock a successful login response
+    fetchMock.mockResponseOnce(JSON.stringify({
+      token: '57969b419e76dcc4da928a69cc294944079451e3',
+      user_id: '1',
+      email: 'awestars@gmail.com',
+    }), {
+      status: 200,
+      headers: { 'Content-Type': 'application/json' },
+    });
+
     // Fill in the fields with valid data and submit
     fireEvent.changeText(usernameInput, 'awestars@gmail.com');
     fireEvent.changeText(passwordInput, 'awestars@gmail.com');
@@ -51,6 +70,14 @@ describe('LoginForm Component', () => {
     const usernameInput = getByPlaceholderText('Username');
     const passwordInput = getByPlaceholderText('Password');
     const loginButton = getByTestId('login-button');
+
+    // Mock an unsuccessful/login login response
+    fetchMock.mockResponseOnce(JSON.stringify({
+      detail: 'Login failed. Please check your information.',
+    }), {
+      status: 400, // Simulating a bad request status
+      headers: { 'Content-Type': 'application/json' },
+    });
 
     // Fill in the fields with invalid data and submit
     fireEvent.changeText(usernameInput, 'invaliduser');

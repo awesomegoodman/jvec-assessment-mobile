@@ -4,9 +4,11 @@ import {
   ComponentContainer,
   ContactNameText,
   CtaButtonText,
+  ErrorText,
   ModalContainer,
   ModalText,
   PhoneNumberText,
+  SuccessText,
   TouchableCta,
 } from '../styles/styles';
 import styled from 'styled-components/native';
@@ -39,6 +41,8 @@ const ContactDetails = () => {
   const contactId = contactObj?.id;
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
   const [deleteModalVisible, setDeleteModalVisible] = useState(false);
+  const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
 
   useEffect(() => {
     // Fetch the contact details from Django backend based on the contact ID
@@ -66,11 +70,15 @@ const ContactDetails = () => {
       if (response.status === 204 || response.status === 200 || response.ok) {
         // Contact deleted successfully
         navigation.navigate('Contacts' as never);
+        setError('');
+        setSuccess('Contact deleted successfully');
       } else {
         console.error('Failed to delete contact');
+        setSuccess('');
+        // setError('Failed to delete contact');
       }
-    } catch (error) {
-      console.error('Error:', error);
+    } catch (err) {
+      console.error('Error:', err);
     }
 
     setDeleteModalVisible(false);
@@ -86,10 +94,12 @@ const ContactDetails = () => {
             <TouchableOpacity onPress={handleEditContact}>
               <Icon2 name="edit" size={30} color="gray" />
             </TouchableOpacity>
-            <TouchableOpacity onPress={handleDeleteContact}>
+            <TouchableOpacity onPress={handleDeleteContact} testID="delete-contact-button" >
               <Icon name="trash" size={30} color="gray" />
             </TouchableOpacity>
           </ButtonContainer>
+          {error && <ErrorText>{error}</ErrorText>}
+          {success && <SuccessText>{success}</SuccessText>}
         </ContactInfo>
       ) : (
         <Text>Loading contact details...</Text>
