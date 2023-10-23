@@ -14,8 +14,9 @@ import ContactsList from '../pages/ContactsList';
 import ContactDetails from '../pages/ContactDetails';
 import { enableScreens } from 'react-native-screens';
 import { RootStackParamList } from '../constants/types';
-import AddButton from '../components/AddContactButton';
 import { screenNames } from '../constants/screenNames';
+// import RightButtons from '../components/RightButtons';
+import AddButton from '../components/AddContactButton';
 enableScreens();
 
 const Stack = createStackNavigator<RootStackParamList>();
@@ -71,7 +72,7 @@ const AppNavigator = () => {
           name={screenNames.Contacts}
           component={ContactsList}
           options={{
-            headerRight: AddButton,
+            headerRight: AddButton, // RightButtons
             headerLeft: () => loggedIn ? null : undefined,
           }}
         />
