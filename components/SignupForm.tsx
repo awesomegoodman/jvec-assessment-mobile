@@ -50,14 +50,14 @@ const SignupForm = () => {
 
       // Check the response and handle it as needed
       if (response.status === 201) {
+        setError(''); // Clear previous errors
         setSuccess('User registered successfully');
         setUsername('');
         setEmail('');
         setPassword('');
         navigation.navigate('Login' as never);
-        setSuccess('');
-        setError('');
       } else {
+        setSuccess('');
         setError('Registration failed. Please adjust your information.');
       }
     } catch (err) {
@@ -68,7 +68,7 @@ const SignupForm = () => {
 
   return (
     <FormContainer>
-      <CtaText>Register</CtaText>
+      <CtaText testID="signup-text">Register</CtaText>
       <InputField
         placeholder="Username"
         value={username}
@@ -90,7 +90,7 @@ const SignupForm = () => {
       />
       {error && <ErrorText>{error}</ErrorText>}
       {success && <SuccessText>{success}</SuccessText>}
-      <CtaButton title="Register" onPress={handleSignup} />
+      <CtaButton title="Register" onPress={handleSignup} testID="register-button" />
     </FormContainer>
   );
 };

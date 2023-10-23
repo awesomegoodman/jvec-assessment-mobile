@@ -37,7 +37,7 @@ const AppNavigator = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName={loggedIn ? 'Contacts' : 'Home'}>
-        <Stack.Screen 
+        <Stack.Screen
           name="Contact Manager"
           options={{
             headerTitleAlign: 'center',

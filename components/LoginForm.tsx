@@ -47,15 +47,15 @@ const LoginForm = () => {
         await AsyncStorage.setItem('authToken', token);
         await AsyncStorage.setItem('userId', String(user_id));
 
+        setError(''); // Clear any previous error
         setSuccess('Login successful');
         setUsername('');
         setPassword('');
         navigation.navigate('Contacts' as never);
-        setSuccess('');
-        setError('');
       } else {
         // Handle login failure, e.g., incorrect username or password
         setError('Login failed. Please check your information.');
+        setSuccess(''); // Clear any previous success message
       }
     } catch (err) {
       console.error('Error:', err);
@@ -65,7 +65,7 @@ const LoginForm = () => {
 
   return (
     <FormContainer>
-      <CtaText>Login</CtaText>
+      <CtaText testID="login-text">Login</CtaText>
       <InputField
         placeholder="Username"
         value={username}
@@ -81,7 +81,7 @@ const LoginForm = () => {
       />
       {error && <ErrorText>{error}</ErrorText>}
       {success && <SuccessText>{success}</SuccessText>}
-      <CtaButton title="Login" onPress={handleLogin} />
+      <CtaButton title="Login" onPress={handleLogin} testID="login-button" />
     </FormContainer>
   );
 };
