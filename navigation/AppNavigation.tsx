@@ -48,7 +48,6 @@ const AppNavigator = () => {
           name="Register"
           component={Signup}
           options={{
-            // headerShown: false,
             headerTitle: '',
           }}
         />
@@ -56,7 +55,6 @@ const AppNavigator = () => {
           name="Login"
           component={Login}
           options={{
-            // headerShown: false,
             headerTitle: '',
           }}
         />
@@ -67,6 +65,7 @@ const AppNavigator = () => {
           component={ContactsList}
           options={{
             headerRight: AddButton,
+            headerLeft: () => loggedIn ? null : undefined,
           }}
         />
         <Stack.Screen name="Contact details" component={ContactDetails} />

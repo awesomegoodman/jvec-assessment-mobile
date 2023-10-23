@@ -2,13 +2,11 @@ import React from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { TouchableOpacity } from 'react-native';
 import styled from 'styled-components/native';
+import Icon from 'react-native-vector-icons/AntDesign';
+
 
 const AddButtonContainer = styled(TouchableOpacity)`
   padding: 10px;
-`;
-
-const AddButtonText = styled.Text`
-  color: blue;
 `;
 
 const AddButton = () => {
@@ -16,7 +14,7 @@ const AddButton = () => {
 
   return (
     <AddButtonContainer onPress={() => navigation.navigate('Add contact' as never)}>
-      <AddButtonText>Add</AddButtonText>
+      <Icon name="adduser" size={30} color="gray" />
     </AddButtonContainer>
   );
 };

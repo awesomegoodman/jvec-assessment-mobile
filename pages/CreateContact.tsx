@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { CtaButton, CtaText, ErrorText, FormContainer, InputField, SuccessText } from '../styles/styles';
+import { CtaButton, CtaText, ErrorText, FormContainer, InputField, SuccessText, placeholderTextColor } from '../styles/styles';
 import { BACKEND_ROOT_DOMAIN, getHeaders } from '../constants/constants';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
@@ -65,19 +65,22 @@ const CreateContact = () => {
       <CtaText>Create Contact</CtaText>
 
       <InputField
-        placeholder="First Name"
+        placeholder="First name"
         value={firstName}
         onChangeText={setFirstName}
+        placeholderTextColor={placeholderTextColor}
       />
       <InputField
-        placeholder="Last Name"
+        placeholder="Last name"
         value={lastName}
         onChangeText={setLastName}
+        placeholderTextColor={placeholderTextColor}
       />
       <InputField
-        placeholder="Phone Number"
+        placeholder="Phone number"
         value={phoneNumber}
         onChangeText={setPhoneNumber}
+        placeholderTextColor={placeholderTextColor}
       />
 
       {error && <ErrorText>{error}</ErrorText>}

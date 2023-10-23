@@ -4,7 +4,6 @@ import {
   ComponentContainer,
   ContactNameText,
   CtaButtonText,
-  DeleteButton,
   ModalContainer,
   ModalText,
   PhoneNumberText,
@@ -15,16 +14,23 @@ import { Text, TouchableOpacity, Modal } from 'react-native';
 import { RouteProp, useRoute, useNavigation } from '@react-navigation/native';
 import { BACKEND_ROOT_DOMAIN } from '../constants/constants';
 import { StackNavigationProp } from '@react-navigation/stack';
+import Icon from 'react-native-vector-icons/EvilIcons';
+import Icon2 from 'react-native-vector-icons/AntDesign';
+
 
 const ContactInfo = styled.View`
   font-size: 18px;
   color: #333;
 `;
 
-const EditButton = styled.Text`
-  color: blue;
-  text-decoration: underline;
+const ButtonContainer = styled.View`
+  flex: 1;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin: auto;
 `;
+
 
 const ContactDetails = () => {
   const [contact, setContact] = useState<Contact | null>(null);
@@ -76,12 +82,14 @@ const ContactDetails = () => {
         <ContactInfo>
           <ContactNameText>Contact Name: {contact.first_name} {contact.last_name}</ContactNameText>
           <PhoneNumberText>Phone Number: {contact.phone_number}</PhoneNumberText>
-          <TouchableOpacity onPress={handleEditContact}>
-            <EditButton>Edit</EditButton>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={handleDeleteContact}>
-            <DeleteButton>Delete</DeleteButton>
-          </TouchableOpacity>
+          <ButtonContainer>
+            <TouchableOpacity onPress={handleEditContact}>
+              <Icon2 name="edit" size={30} color="gray" />
+            </TouchableOpacity>
+            <TouchableOpacity onPress={handleDeleteContact}>
+              <Icon name="trash" size={30} color="gray" />
+            </TouchableOpacity>
+          </ButtonContainer>
         </ContactInfo>
       ) : (
         <Text>Loading contact details...</Text>

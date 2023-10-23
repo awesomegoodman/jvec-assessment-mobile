@@ -31,6 +31,7 @@ export const InputField = styled.TextInput`
   margin-bottom: 20px;
   font-size: 16px;
   color: #333;
+  
 `;
 
 export const ErrorText = styled.Text`
@@ -46,11 +47,10 @@ export const SuccessText = styled.Text`
 `;
 
 export const CtaButton = styled.Button`
-  width: 80%;
   background-color: #007BFF;
   align-items: center;
   padding: 15px;
-  border-radius: 5px;
+  border-radius: 10px;
 `;
 
 export const TouchableCta = styled.TouchableOpacity`
@@ -97,3 +97,5 @@ export const PhoneNumberText = styled.Text`
   font-size: 18px;
   color: #333;
 `;
+
+export const placeholderTextColor = 'gray';

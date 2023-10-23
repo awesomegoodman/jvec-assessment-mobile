@@ -13,6 +13,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { Modal } from 'react-native';
 import { BACKEND_ROOT_DOMAIN } from '../constants/constants';
+import Icon from 'react-native-vector-icons/EvilIcons';
 
 const ContactItem = styled.View`
   padding: 20px;
@@ -29,10 +30,6 @@ const ContactName = styled.Text`
   color: #333;
 `;
 
-const DeleteText = styled.Text`
-  font-size: 18px;
-  color: #FF0000;
-`;
 
 const ContactsList = () => {
   const [contacts, setContacts] = useState<Contact[]>([]);
@@ -97,7 +94,7 @@ const ContactsList = () => {
               {contact.first_name} {contact.last_name}
             </ContactName>
             <TouchableOpacity onPress={() => handleDeleteContact(contact.id)}>
-              <DeleteText>Delete</DeleteText>
+              <Icon name="trash" size={30} color="gray" />
             </TouchableOpacity>
           </ContactItem>
         </TouchableOpacity>

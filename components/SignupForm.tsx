@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { CtaButton, CtaText, ErrorText, FormContainer, InputField, SuccessText } from '../styles/styles';
+import { CtaButton, CtaText, ErrorText, FormContainer, InputField, SuccessText, placeholderTextColor } from '../styles/styles';
 import { BACKEND_ROOT_DOMAIN } from '../constants/constants';
 import { useNavigation } from '@react-navigation/native';
 
@@ -73,16 +73,19 @@ const SignupForm = () => {
         placeholder="Username"
         value={username}
         onChangeText={setUsername}
+        placeholderTextColor={placeholderTextColor}
       />
       <InputField
         placeholder="Email"
         value={email}
         onChangeText={setEmail}
+        placeholderTextColor={placeholderTextColor}
       />
       <InputField
         placeholder="Password"
         value={password}
         onChangeText={setPassword}
+        placeholderTextColor={placeholderTextColor}
         secureTextEntry
       />
       {error && <ErrorText>{error}</ErrorText>}
