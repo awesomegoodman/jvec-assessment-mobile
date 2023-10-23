@@ -4,6 +4,8 @@ import { BACKEND_ROOT_DOMAIN, getHeaders } from '../constants/constants';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
 import { screenNames } from '../constants/screenNames';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { RootStackParamList } from '../constants/types';
 
 const CreateContact = () => {
   const [firstName, setFirstName] = useState('');
@@ -11,7 +13,7 @@ const CreateContact = () => {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
-  const navigation = useNavigation();
+  const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
 
   const handleCreateContact = async () => {
     // Basic input validation
@@ -51,7 +53,7 @@ const CreateContact = () => {
         setFirstName('');
         setLastName('');
         setPhoneNumber('');
-        navigation.navigate(screenNames.Contacts as never);
+        navigation.navigate(screenNames.Contacts, { newContact: true });
       } else {
         // Handle contact creation failure
         setError('Contact creation failed. Please check your information.');

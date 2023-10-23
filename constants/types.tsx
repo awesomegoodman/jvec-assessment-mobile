@@ -5,6 +5,7 @@ export type RootStackParamList = {
     Homepage: undefined;
     Signup: undefined;
     ContactDetails: { contact: Contact };
+    ContactsList: { newContact?: boolean };
     DeleteContact: { contactId: number };
     EditContact: { contact: Contact };
 } & ParamListBase;

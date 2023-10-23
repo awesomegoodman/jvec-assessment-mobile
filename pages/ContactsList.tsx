@@ -7,7 +7,7 @@ import {
   ContactName,
   ScrollableContainer,
 } from '../styles/styles';
-import { useNavigation } from '@react-navigation/native';
+import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { BACKEND_ROOT_DOMAIN } from '../constants/constants';
@@ -32,6 +32,7 @@ const ButtonContainer = styled.TouchableOpacity`
 const ContactsList = () => {
   const [contacts, setContacts] = useState<Contact[]>([]);
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
+  const route = useRoute<RouteProp<RootStackParamList, 'ContactsList'>>();
   const [deleteModalVisible, setDeleteModalVisible] = useState(false);
   const [contactToDelete, setContactToDelete] = useState<number | null>(null);
   const [isLoading, setLoading] = useState(true);
@@ -48,7 +49,7 @@ const ContactsList = () => {
       }
     };
     fetchContacts();
-  }, []);
+  }, [route.params]);
 
   const handleContactPress = (contact: Contact) => {
     navigation.navigate(screenNames.ContactDetails, { contact: contact });
@@ -70,7 +71,7 @@ const ContactsList = () => {
         );
         const data = response.json();
         console.log(data);
-        if (response.status === 204) {
+        if (response.status === 204 || response.status === 200 || response.ok) {
           // Contact deleted successfully
           setContacts(contacts.filter((contact) => contact.id !== contactToDelete));
         } else {
