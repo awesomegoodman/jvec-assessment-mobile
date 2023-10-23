@@ -2,7 +2,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 // export const BACKEND_ROOT_DOMAIN = 'http://192.168.43.150:8000';
 // export const BACKEND_ROOT_DOMAIN = 'http://127.0.0.1:8000';
-export const BACKEND_ROOT_DOMAIN = 'https://dd57-105-113-88-236.ngrok.io';
+export const BACKEND_ROOT_DOMAIN = 'https://8937-105-113-88-236.ngrok.io';
 
 // Function to generate headers with authorization token
 export const getHeaders = async () => {

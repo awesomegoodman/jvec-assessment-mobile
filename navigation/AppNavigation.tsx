@@ -22,7 +22,7 @@ const Stack = createStackNavigator<RootStackParamList>();
 
 const AppNavigator = () => {
 
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState<boolean | null | undefined>(null);
 
   useEffect(() => {
     // Check if the user is logged in
@@ -30,10 +30,16 @@ const AppNavigator = () => {
       const token = await AsyncStorage.getItem('authToken');
       if (token) {
         setLoggedIn(true);
+      } else {
+        setLoggedIn(false);
       }
     };
     checkLoginStatus();
   }, []);
+
+  if (loggedIn === null || undefined) {
+    return null;
+  }
 
   return (
     <NavigationContainer>
