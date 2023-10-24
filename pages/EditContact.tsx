@@ -4,6 +4,7 @@ import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import { RootStackParamList } from '../constants/types';
 import { BACKEND_ROOT_DOMAIN, getHeaders } from '../constants/constants';
 import { screenNames } from '../constants/screenNames';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const EditContact = () => {
   const route = useRoute<RouteProp<RootStackParamList, 'EditContact'>>();
@@ -23,12 +24,14 @@ const EditContact = () => {
       return;
     }
 
+    const userId = await AsyncStorage.getItem('userId');
+
     // Create a JSON object with contact data
     const contactData = {
       first_name: firstName,
       last_name: lastName,
       phone_number: phoneNumber,
-      user: contactId,
+      user: userId,
     };
 
     const headers = await getHeaders();

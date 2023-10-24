@@ -10,7 +10,7 @@ import {
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { StackNavigationProp } from '@react-navigation/stack';
-import { BACKEND_ROOT_DOMAIN } from '../constants/constants';
+import { BACKEND_ROOT_DOMAIN, getHeaders } from '../constants/constants';
 import Icon from 'react-native-vector-icons/EvilIcons';
 import Icon2 from 'react-native-vector-icons/AntDesign';
 import CustomModal from '../components/Modal';
@@ -40,7 +40,12 @@ const ContactsList = () => {
   useEffect(() => {
     const fetchContacts = async () => {
       try {
-        const response = await fetch(`${BACKEND_ROOT_DOMAIN}/contacts/list/`);
+
+        const headers = await getHeaders();
+
+        const response = await fetch(`${BACKEND_ROOT_DOMAIN}/contacts/list/`, {
+          headers,
+        });
         const data = await response.json();
         setContacts(data);
         setLoading(false);

@@ -57,6 +57,9 @@ const SignupForm = () => {
         setEmail('');
         setPassword('');
         navigation.navigate(screenNames.Login as never);
+        setSuccess('');
+      } else if (response.status === 400) {
+        setError('Email or username has already been registered');
       } else {
         setSuccess('');
         setError('Registration failed. Please adjust your information.');

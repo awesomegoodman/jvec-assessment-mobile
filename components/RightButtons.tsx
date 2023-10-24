@@ -6,7 +6,7 @@ import styled from 'styled-components/native';
 
 const HeaderButtonContainer = styled(View)`
   flex-direction: row;
-  margin-right: 10px;
+  margin-right: 3px;
 `;
 
 const RightButtons = () => {

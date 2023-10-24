@@ -53,6 +53,7 @@ const LoginForm = () => {
         setUsername('');
         setPassword('');
         navigation.navigate(screenNames.Contacts as never);
+        setSuccess('');
       } else {
         // Handle login failure, e.g., incorrect username or password
         setError('Login failed. Please check your information.');
