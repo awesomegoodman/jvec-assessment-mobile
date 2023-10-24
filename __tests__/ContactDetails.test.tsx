@@ -35,9 +35,9 @@ describe('ContactDetails Component', () => {
     (global.fetch as any).mockResolvedValueOnce({ json: () => mockContact });
 
     const { getByText } = render(
-        <NavigationContainer>
-            <ContactDetails />
-        </NavigationContainer>
+      <NavigationContainer>
+        <ContactDetails />
+      </NavigationContainer>
     );
 
     // Ensure "Loading contact details..." text is displayed

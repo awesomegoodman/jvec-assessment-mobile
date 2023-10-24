@@ -1,6 +1,6 @@
 import React from 'react';
-import SignupForm from '../components/SignupForm';
-import { fireEvent, render } from '@testing-library/react-native';
+import SignupForm from '../components/RegisterForm';
+import { fireEvent, render, waitFor } from '@testing-library/react-native';
 
 import { useNavigation } from '@react-navigation/native';
 import fetchMock from 'jest-fetch-mock';
@@ -86,9 +86,11 @@ describe('SignupForm Component', () => {
     fireEvent.changeText(passwordInput, 'password123');
     fireEvent.press(registerButton);
 
-    // Wait for the success message to appear
-    const successMessage = await findByText('User registered successfully');
+    // Wait for the success message to appear using waitFor
+    await waitFor(() => {
+      const successMessage = findByText('User registered successfully');
+      expect(successMessage).toBeTruthy();
+    });
 
-    expect(successMessage).toBeTruthy();
   });
 });

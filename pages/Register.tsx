@@ -1,6 +1,6 @@
 import React from 'react';
 // import { View, Text } from 'react-native';
-import SignupForm from '../components/SignupForm';
+import SignupForm from '../components/RegisterForm';
 import { ComponentContainer } from '../styles/styles';
 
 

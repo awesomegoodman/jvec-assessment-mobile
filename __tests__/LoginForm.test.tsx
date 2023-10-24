@@ -1,6 +1,6 @@
 import React from 'react';
 import LoginForm from '../components/LoginForm';
-import { fireEvent, render } from '@testing-library/react-native';
+import { fireEvent, render, waitFor } from '@testing-library/react-native';
 
 import { useNavigation } from '@react-navigation/native';
 import fetchMock from 'jest-fetch-mock';
@@ -57,10 +57,11 @@ describe('LoginForm Component', () => {
     fireEvent.changeText(passwordInput, 'awestars@gmail.com');
     fireEvent.press(loginButton);
 
-    // Wait for the success message to appear
-    const successMessage = await findByText('Login successful');
-
-    expect(successMessage).toBeTruthy();
+    // Wait for the success message to appear using waitFor
+    await waitFor(() => {
+      const successMessage = findByText('Login successful');
+      expect(successMessage).toBeTruthy();
+    });
   });
 
   it('handles login failure', async () => {

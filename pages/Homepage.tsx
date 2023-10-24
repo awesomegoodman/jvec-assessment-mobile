@@ -20,11 +20,11 @@ const Homepage = () => {
       <DescriptionText>
         Manage your contacts on the fly!
       </DescriptionText>
-        <TouchableCta onPress={() => navigation.navigate(screenNames.Register as never)}>
-          <CtaButtonText>Signup</CtaButtonText>
+        <TouchableCta onPress={() => navigation.navigate(screenNames.Register as never)} testID="register-button">
+          <CtaButtonText>{screenNames.Register}</CtaButtonText>
         </TouchableCta>
-        <TouchableCta onPress={() => navigation.navigate(screenNames.Login as never)}>
-          <CtaButtonText>Login</CtaButtonText>
+        <TouchableCta onPress={() => navigation.navigate(screenNames.Login as never)} testID="login-button">
+          <CtaButtonText>{screenNames.Login}</CtaButtonText>
         </TouchableCta>
     </ComponentContainer>
   );
