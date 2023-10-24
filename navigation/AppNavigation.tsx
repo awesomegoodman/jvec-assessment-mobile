@@ -6,7 +6,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import Homepage from '../pages/Homepage';
-import Signup from '../pages/Signup';
+import Signup from '../pages/Register';
 import Login from '../pages/Login';
 import CreateContact from '../pages/CreateContact';
 import EditContact from '../pages/EditContact';

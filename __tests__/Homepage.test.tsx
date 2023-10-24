@@ -28,7 +28,6 @@ describe('Homepage Component', () => {
 
   it('navigates to Register and Login screens', async () => {
     const { getByTestId } = render(<Homepage />);
-    console.log(useNavigation().navigate);
 
     // Click the "Register" button and wait for the navigation to complete
     fireEvent.press(getByTestId('register-button'));

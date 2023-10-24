@@ -43,11 +43,13 @@ describe('ContactDetails Component', () => {
     // Ensure "Loading contact details..." text is displayed
     expect(getByText('Loading contact details...')).toBeTruthy();
 
-    // Wait for the data to load
-    await waitFor(() => {
+    await waitFor(async () => {
       // Ensure the contact details are displayed
-      expect(getByText(`Contact Name: ${mockContact.first_name} ${mockContact.last_name}`)).toBeTruthy();
-      expect(getByText(`Phone Number: ${mockContact.phone_number}`)).toBeTruthy();
+      const contactNameText = `${mockContact.first_name} ${mockContact.last_name}`;
+      const phoneNumberText = `${mockContact.phone_number}`;
+
+      expect(getByText(contactNameText)).toBeTruthy();
+      expect(getByText(phoneNumberText)).toBeTruthy();
     });
   });
 
@@ -67,14 +69,14 @@ describe('ContactDetails Component', () => {
     (global.fetch as any).mockResolvedValueOnce({ status: 204 });
 
     const { getByText, getByTestId } = render(
-        <NavigationContainer>
-            <ContactDetails />
-        </NavigationContainer>
+      <NavigationContainer>
+        <ContactDetails />
+      </NavigationContainer>
     );
 
     // Wait for the data to load
     await waitFor(() => {
-      expect(getByText(`Contact Name: ${mockContact.first_name} ${mockContact.last_name}`)).toBeTruthy();
+      expect(getByText(`${mockContact.first_name} ${mockContact.last_name}`)).toBeTruthy();
     });
 
     // Click the delete button

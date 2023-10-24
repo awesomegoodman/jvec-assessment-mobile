@@ -44,8 +44,8 @@ const EditContact = () => {
         body: JSON.stringify(contactData),
       });
 
-      const data = await response.json();
-      console.log(data);
+      // const data = await response.json();
+      // console.log(data);
 
       if (response.status === 200) {
         // Contact update successful, handle the response as needed
@@ -86,7 +86,7 @@ const EditContact = () => {
       {error && <ErrorText>{error}</ErrorText>}
       {success && <SuccessText>{success}</SuccessText>}
 
-      <TouchableCta onPress={handleUpdateContact}>
+      <TouchableCta onPress={handleUpdateContact} testID="update-button">
         <CtaButtonText>Update</CtaButtonText>
       </TouchableCta>
     </FormContainer>

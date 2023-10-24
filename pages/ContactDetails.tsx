@@ -104,10 +104,10 @@ const ContactDetails = () => {
           <ContactItem>
             <ContactInfo>
               <LabelText>Contact Name</LabelText>
-              <ContactName>{contact.first_name} {contact.last_name}</ContactName>
+              <ContactName testID="contact-name">{contact.first_name} {contact.last_name}</ContactName>
 
               <LabelText>Phone Number</LabelText>
-              <ContactName>{contact.phone_number}</ContactName>
+              <ContactName testID="phone-number">{contact.phone_number}</ContactName>
             </ContactInfo>
             <ButtonContainer>
               <Icon2 name="pencil" size={30} color="gray" onPress={handleEditContact} />

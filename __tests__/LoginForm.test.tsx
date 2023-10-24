@@ -21,7 +21,7 @@ afterEach(() => {
 
 describe('LoginForm Component', () => {
   it('renders the form elements', () => {
-    useNavigation(); // Adding useNavigation here to resolve the warning
+    useNavigation();
     const { getByPlaceholderText, getByTestId } = render(<LoginForm />);
 
     // Check if the form elements are rendered
@@ -31,7 +31,7 @@ describe('LoginForm Component', () => {
   });
 
   it('validates user login', async () => {
-    useNavigation(); // Adding useNavigation here to resolve the warning
+    useNavigation();
     const { getByPlaceholderText, getByTestId, queryByText, findByText } = render(<LoginForm />);
 
     const usernameInput = getByPlaceholderText('Username');
@@ -44,7 +44,7 @@ describe('LoginForm Component', () => {
 
     // Mock a successful login response
     fetchMock.mockResponseOnce(JSON.stringify({
-      token: '57969b419e76dcc4da928a69cc294944079451e3',
+      token: '57969b419e76dcc4da928a69cc294944079451e3', // simulate a token
       user_id: '1',
       email: 'awestars@gmail.com',
     }), {
@@ -65,7 +65,7 @@ describe('LoginForm Component', () => {
   });
 
   it('handles login failure', async () => {
-    useNavigation(); // Adding useNavigation here to resolve the warning
+    useNavigation();
     const { getByPlaceholderText, getByTestId, findByText } = render(<LoginForm />);
 
     const usernameInput = getByPlaceholderText('Username');

@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, fireEvent } from '@testing-library/react-native';
+import { render, fireEvent, waitFor } from '@testing-library/react-native';
 import CreateContact from '../pages/CreateContact';
 
 import { useNavigation } from '@react-navigation/native';
@@ -64,12 +64,12 @@ describe('CreateContact Component', () => {
 
   it('validates contact creation - success', async () => {
     useNavigation(); // Adding useNavigation here to resolve the warning
-    const { getByPlaceholderText, getByTestId, findByText } = render(<CreateContact />);
+    const { getByPlaceholderText, getByTestId, getByText } = render(<CreateContact />);
 
     const firstNameInput = getByPlaceholderText('First name');
     const lastNameInput = getByPlaceholderText('Last name');
     const phoneNumberInput = getByPlaceholderText('Phone number');
-    const createButton = getByTestId('create-contact-text');
+    const createButton = getByTestId('create-contact');
 
     // Mock a successful contact creation response
     fetchMock.mockResponseOnce(JSON.stringify({
@@ -85,9 +85,9 @@ describe('CreateContact Component', () => {
     fireEvent.changeText(phoneNumberInput, '12345678900');
     fireEvent.press(createButton);
 
-    // Wait for the success message to appear
-    const successMessage = await findByText('Contact created successfully');
-
-    expect(successMessage).toBeTruthy();
+    // Use waitFor to wait for the success message
+    await waitFor(() => {
+      expect(getByText('Contact created successfully')).toBeTruthy();
+    });
   });
 });

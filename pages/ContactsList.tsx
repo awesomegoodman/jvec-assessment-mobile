@@ -74,7 +74,7 @@ const ContactsList = () => {
             method: 'DELETE',
           }
         );
-        const data = response.json();
+        const data = await response.json();
         console.log(data);
         if (response.status === 204 || response.status === 200 || response.ok) {
           // Contact deleted successfully
@@ -105,7 +105,7 @@ const ContactsList = () => {
                 {contact.first_name} {contact.last_name}
               </ContactName>
             </TextContainer>
-            <ButtonContainer onPress={() => handleDeleteContact(contact.id)}>
+            <ButtonContainer onPress={() => handleDeleteContact(contact.id)} testID="delete-button">
               <Icon name="trash" size={30} color="gray" />
             </ButtonContainer>
           </ContactItem>
@@ -113,6 +113,7 @@ const ContactsList = () => {
 
         {!isLoading && contacts.length === 0 && (
           <TouchableOpacity
+            testID="add-contact-button"
             onPress={() => navigation.navigate(screenNames.AddContact)}
           >
             <ButtonContainer>
