@@ -3,23 +3,19 @@ import { Contact, RootStackParamList } from '../constants/types';
 import {
   ComponentContainer,
   ContactName,
-  CtaButtonText,
   ErrorText,
   LabelText,
-  ModalContainer,
-  ModalText,
   ScrollableContainer,
   SuccessText,
-  TouchableCta,
 } from '../styles/styles';
 import styled from 'styled-components/native';
-import { Text, Modal } from 'react-native';
 import { RouteProp, useRoute, useNavigation } from '@react-navigation/native';
 import { BACKEND_ROOT_DOMAIN } from '../constants/constants';
 import { StackNavigationProp } from '@react-navigation/stack';
 import Icon from 'react-native-vector-icons/EvilIcons';
 import Icon2 from 'react-native-vector-icons/EvilIcons';
 import { screenNames } from '../constants/screenNames';
+import CustomModal from '../components/Modal';
 
 
 const ButtonContainer = styled.TouchableOpacity`
@@ -117,27 +113,19 @@ const ContactDetails = () => {
             </ButtonContainer>
           </ContactItem>
         ) : (
-          <Text>Loading contact details...</Text>
+          <></>
         )}
 
         {error && <ErrorText>{error}</ErrorText>}
         {success && <SuccessText>{success}</SuccessText>}
 
-        <Modal
-          animationType="slide"
-          transparent={true}
+        <CustomModal
           visible={deleteModalVisible}
-        >
-          <ModalContainer>
-            <ModalText>Are you sure you want to delete this contact?</ModalText>
-            <TouchableCta onPress={handleDelete}>
-              <CtaButtonText>Delete</CtaButtonText>
-            </TouchableCta>
-            <TouchableCta onPress={() => setDeleteModalVisible(false)}>
-              <CtaButtonText>Cancel</CtaButtonText>
-            </TouchableCta>
-          </ModalContainer>
-        </Modal>
+          text="Are you sure you want to delete this contact?"
+          onDelete={handleDelete}
+          onCancel={() => setDeleteModalVisible(false)}
+        />
+
       </ComponentContainer>
     </ScrollableContainer>
   );
