@@ -60,9 +60,13 @@ describe('EditContact Component', () => {
     const phoneNumberInput = getByPlaceholderText('Phone Number');
     const updateButton = getByTestId('update-button');
 
+    let timeoutId; // Variable to store the timeout ID
+
     // Try to submit the form with empty fields
     fireEvent.press(updateButton);
-    setTimeout(() => {
+
+    // Set a timeout and store its ID in the variable
+    timeoutId = setTimeout(() => {
       expect(queryByText('Please fill in all fields.')).toBeTruthy();
     }, 1000);
 
@@ -79,6 +83,9 @@ describe('EditContact Component', () => {
     fireEvent.changeText(lastNameInput, 'Doe');
     fireEvent.changeText(phoneNumberInput, '1234567890');
     fireEvent.press(updateButton);
+
+    // Clear the timeout
+    clearTimeout(timeoutId);
 
     // Wait for the success message to appear
     await waitFor(() => {
