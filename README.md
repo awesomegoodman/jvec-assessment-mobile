@@ -2,67 +2,96 @@
 
 **Overview**
 
-This project is a Contact Manager Mobile App built with React Native, designed to complement the Contact Manager backend API created with Django. The app allows users to register, log in, manage their contacts, and perform various operations like creating, updating, viewing, and deleting contacts.
+This repository contains a React Native mobile app designed for contact management. It enables user registration and authentication, contact creation, editing, and deletion, and provides a user-friendly and responsive interface.
 
 **Features**
 
 - User Registration and Authentication
-- Create, Update, and Delete Contacts
+- Contact Management (Create, Update, Delete)
 - List and View Contact Details
-- User-Friendly and Responsive User Interface
 - Modal Confirmation for Deleting Contacts
 - Token-Based Authentication
 
+## Getting Started
+
+**Prerequisites**
+
+- [Node.js](https://nodejs.org/)
+
 **Installation**
 
-Before running the mobile app, make sure you have Node.js and npm installed on your system. Also, ensure you have cloned the ['jvec-assessment-mobile' repository](https://github.com/awesomegoodman/jvec-assessment-mobile). Navigate to the project folder and follow these steps:
+1. Clone the repository:
 
-1. Install project dependencies by running the following command in the project root:
-
+   ```bash
+   git clone https://github.com/awesomegoodman/jvec-assessment-mobile.git
    ```
+
+2. Navigate to the project directory:
+
+   ```bash
+   cd jvec-assessment-mobile/ContactManager
+   ```
+
+3. Install project dependencies:
+
+   ```bash
    npm install
    ```
 
-2. Ensure you have an Android emulator or device connected to your development environment.
+**Running the App**
 
-3. Start the React Native app using the following command:
+After installing dependencies:
 
-   ```
-   npx react-native run-android
-   ```
+- Start the development server:
 
-   This command will build and run the app on your Android device or emulator.
+  ```bash
+  npx react-native run-android
+  ```
 
-**Screens and Navigation**
+## App Screens and Navigation
 
-The app is divided into several screens and supports seamless navigation:
+**Homepage**: Displays app information.
 
-- **Homepage**: Displays useful information about the mobile app.
-- **Signup/Login**: Allows users to either sign up or log in.
-- **Create Contact**: Contains a form for adding a new contact.
-- **Edit Contact**: Lets users update contact information.
-- **Contacts List**: Lists all saved contacts and offers options to view, edit, or delete them.
-- **Contact Details**: Shows comprehensive details of a contact, with options to edit or delete.
-- **Deleting Contacts**: You can delete contacts from the Contacts List or the Contact Details page.
-- **User Authentication**: Logged-in users are directed to the Contacts List, while anonymous visitors are redirected to the Homepage.
+**Signup/Login**: User registration and login.
+
+**Create Contact**: Form to add a new contact.
+
+**Edit Contact**: Modify contact details.
+
+**Contacts List**: View and manage saved contacts.
+
+**Contact Details**: Comprehensive contact information.
+
+**Deleting Contacts**: Easily remove contacts from the list.
+
+**User Authentication**: Redirects logged-in users to Contacts List; anonymous visitors to Homepage.
+
+## Directory Structure
+
+- `components`: Reusable components.
+- `constants`: App constants.
+- `navigation`: Screen navigation management.
+- `pages`: Main screens (homepage, signup/login, create contact, edit contact, contacts list, and contact details).
+- `styles`: Stylesheets for UI components.
+- `__tests__`: Unit tests for various components and screens.
 
 **Styling and UI**
 
-The app has a clean and user-friendly design. It is highly responsive and follows standard mobile app UI conventions. Styling is achieved using styled-components to maintain a modular and maintainable codebase, adhering to best practices. Inline styles have been avoided.
+The app is responsive, user-friendly, and adheres to mobile UI conventions. Styling is done using styled-components, maintaining a modular and maintainable codebase.
 
 **App Logic and Functionality**
 
-- The mobile app communicates with the Django backend through API endpoints for user registration, login, contact management, and more.
-- Token-based authentication is implemented to secure user actions.
-- Comprehensive error handling is in place to provide informative responses.
-- A modal confirmation dialog is used for deleting contacts to prevent accidental deletions.
-- Security features, such as password hashing and rate limiting, are carried over from the backend.
-- CORS policies are configured to ensure proper communication with the backend.
+- Communicates with the Django backend via API endpoints.
+- Implements token-based authentication.
+- Provides comprehensive error handling.
+- Utilizes modal confirmation for safe contact deletions.
+- Ensures data security, including password hashing and rate limiting.
+- Maintains proper CORS configuration for backend communication.
 
-**Contributing and Testing**
+**Testing**
 
-Unit tests are available to validate the app's features. You can run these tests with the following command:
+Unit tests are available to validate the app's features. Run tests using:
 
-```
+```bash
 npm test
 ```
