@@ -20,6 +20,6 @@ export type Contact = {
 export type CustomModalProps = {
     visible: boolean;
     text: string;
-    onDelete: () => void;
+    onConfirm: () => void;
     onCancel: () => void;
 };

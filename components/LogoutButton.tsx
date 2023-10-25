@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { TouchableOpacity } from 'react-native';
 import styled from 'styled-components/native';
 import { screenNames } from '../constants/screenNames';
@@ -6,6 +6,7 @@ import { BACKEND_ROOT_DOMAIN, getHeaders } from '../constants/constants';
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/AntDesign';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import CustomModal from './Modal';
 
 const LogoutButtonContainer = styled(TouchableOpacity)`
   padding: 10px;
@@ -14,8 +15,9 @@ const LogoutButtonContainer = styled(TouchableOpacity)`
 const LogoutButton = () => {
 
     const navigation = useNavigation();
+    const [isLogoutModalVisible, setLogoutModalVisible] = useState(false);
 
-    const handleLogout = async () => {
+    const confirmLogout = async () => {
         try {
 
         const headers = await getHeaders();
@@ -36,12 +38,30 @@ const LogoutButton = () => {
         } catch (err) {
         console.error('Logout failed:', err);
         }
+        setLogoutModalVisible(false);
     };
 
+    const handleLogout = async () => {
+        setLogoutModalVisible(true);
+    };
+
+    const cancelLogout = () => {
+        setLogoutModalVisible(false);
+    };
+
+
     return (
+    <>
         <LogoutButtonContainer onPress={handleLogout}>
             <Icon name="logout" size={30} color="gray" />
         </LogoutButtonContainer>
+        <CustomModal
+            visible={isLogoutModalVisible}
+            text="Are you sure you want to log out?"
+            onConfirm={confirmLogout}
+            onCancel={cancelLogout}
+        />
+    </>
     );
 };
 

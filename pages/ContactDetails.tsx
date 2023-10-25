@@ -122,7 +122,7 @@ const ContactDetails = () => {
         <CustomModal
           visible={deleteModalVisible}
           text="Are you sure you want to delete this contact?"
-          onDelete={handleDelete}
+          onConfirm={handleDelete}
           onCancel={() => setDeleteModalVisible(false)}
         />
 

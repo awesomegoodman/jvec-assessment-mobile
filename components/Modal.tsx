@@ -43,7 +43,7 @@ const ButtonText = styled.Text`
   text-align: center;
 `;
 
-const CustomModal = ({ visible, text, onDelete, onCancel }: CustomModalProps) => {
+const CustomModal = ({ visible, text, onConfirm, onCancel }: CustomModalProps) => {
   return (
     <Modal
       animationType="fade"
@@ -54,11 +54,11 @@ const CustomModal = ({ visible, text, onDelete, onCancel }: CustomModalProps) =>
         <ModalContent>
           <ModalText>{text}</ModalText>
           <ButtonContainer>
-            <ActionButton onPress={onDelete}>
-              <ButtonText>Delete</ButtonText>
+            <ActionButton onPress={onConfirm}>
+              <ButtonText>Yes</ButtonText>
             </ActionButton>
             <ActionButton onPress={onCancel}>
-              <ButtonText>Cancel</ButtonText>
+              <ButtonText>No</ButtonText>
             </ActionButton>
           </ButtonContainer>
         </ModalContent>
